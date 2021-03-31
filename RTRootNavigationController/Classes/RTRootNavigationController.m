@@ -612,7 +612,7 @@ __attribute((overloadable)) static inline UIViewController *RTSafeWrapViewContro
 {
     BOOL isRootVC = viewController == RTSafeUnwrapViewController(self.viewControllers.firstObject);
     BOOL hasSetLeftItem = viewController.navigationItem.leftBarButtonItem != nil;
-    if (!isRootVC && !self.useSystemBackBarButtonItem && !hasSetLeftItem) {
+    if (!isRootVC && !self.useSystemBackBarButtonItem && !hasSetLeftItem && viewController.navigationItem.hidesBackButton == NO) {
         if ([viewController respondsToSelector:@selector(rt_customBackItemWithTarget:action:)]) {
             viewController.navigationItem.leftBarButtonItem = [viewController rt_customBackItemWithTarget:self
                                                                                                    action:@selector(onBack:)];
